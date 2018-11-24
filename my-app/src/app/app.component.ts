@@ -11,7 +11,8 @@ import { map } from 'rxjs/operators';
 
 export class AppComponent {
   title = 'my lil app';
-  name:string;
+  name: string;
+  imag: any;
   constructor(private httpClient: HttpClient) { }
 
   onNameKeyUp(event: any) {
@@ -27,6 +28,15 @@ export class AppComponent {
             this.name = brand['value']['joke'];
           }
         }
+      )
+  }
+
+  getNasaImage() {
+    this.httpClient.get('https://api.nasa.gov/planetary/apod?api_key=qtpWfKWxhZg2gGqxkzohZK037Rdvth9OQ8RcV9Tz')
+      .subscribe(
+        (data: any) => {
+        this.imag = data['url'];
+      }
       )
   }
 }
